@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
+from login.models import CustomUser
+from login.forms import signUpForm
 
 def home(request):
     return render(request, 'login/home.html')
@@ -11,12 +13,17 @@ def home(request):
 
 def signupuser(request):
     if request.method == 'GET':
-        return render(request, 'login/signupuser.html', {'form':UserCreationForm()})
+        return render(request, 'login/signupuser.html', {'form':signUpForm()})
     else:
         # create a new user
         if request.POST['password1'] == request.POST['password2']:
             try:
-                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                user = CustomUser.objects.create_user(username=request.POST['username'],
+                                                      password=request.POST['password1'],
+                                                      email=request.POST['email'],
+                                                      point_number=0,
+                                                      name=request.POST['name'],
+                                                      surname=request.POST['surname'])
                 user.save()
                 login(request, user)
                 return redirect('currenttodos')
