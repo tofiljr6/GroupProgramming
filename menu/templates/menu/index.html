@@ -1,0 +1,14 @@
+{% if type_list %}
+{% for type in type_list %}
+    {% if type.menu_set.count > 0 %}
+    <h1>{{ type.type_name }}</h1>
+    <ul>
+        {% for dish in type.menu_set.all %}
+        <li><a href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endfor %}
+{% else %}
+    <p>Menu is empty.</p>
+{% endif %}
