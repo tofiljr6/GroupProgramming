@@ -29,6 +29,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('example/', views.currenttodos, name='currenttodos'),
 
-    #menu
+    # menu
     path('menu/', include('menu.urls')),
+
+    # tables layout
+    path('tables_layout/', include('tables_layout.urls')),
 ]

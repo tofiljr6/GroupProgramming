@@ -1,0 +1,16 @@
+{% if tables_list %}
+    <ul>
+        {% for table in tables_list %}
+        <li><label>Table: {{ table.id }}</label></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="{% url 'add' %}" method="post">
+{% csrf_token %}
+    <input type="submit" value="Add">
+</form>
+<form action="{% url 'remove' %}" method="post">
+{% csrf_token %}
+    <input type="submit" value="Remove">
+</form>
