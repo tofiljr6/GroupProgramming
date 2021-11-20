@@ -1,6 +1,6 @@
-{% if user.is_authenticated %}
+{% if customuser.is_authenticated %}
 
-Logged In as {{ user.username }}
+Logged In as {{ customuser.username }}
 
 
 <form action="{% url 'logoutuser' %}" method="POST">
