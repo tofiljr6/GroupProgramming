@@ -1,0 +1,28 @@
+<head>
+<meta charset="UTF-8">
+<title>Order</title>
+</head>
+<body>
+<form action="" method="POST">
+{% csrf_token %}
+{{ orderForm.as_p }}
+<input type="Submit" name="submit" value="Submit"/>
+</form>
+
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ tableForm.as_p }}
+    <input type="Submit" name="submitTable" value="Change table"/>
+    </form>
+
+
+{% if submitbutton == "Submit" %} 
+{% for dish in dishes %}
+<li>{{ dish.name}} {{ dish.price }}</li>
+{% endfor %}
+
+{% endif %}
+
+</body>

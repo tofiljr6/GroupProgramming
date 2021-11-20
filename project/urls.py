@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from login import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -34,4 +35,6 @@ urlpatterns = [
 
     # tables layout
     path('tables_layout/', include('tables_layout.urls')),
+    
+    path('order/', include('order.urls'))
 ]
