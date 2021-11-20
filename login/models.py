@@ -25,8 +25,6 @@ class Supply(models.Model):
     date = models.DateField()
     realised = models.BooleanField(default=False)
 
-
-
 class Menu(models.Model):
     type = models.TextChoices('Type', 'DRINK DISH')
     name = models.CharField(max_length=200)
