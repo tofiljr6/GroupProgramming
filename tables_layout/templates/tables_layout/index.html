@@ -6,11 +6,11 @@
     </ul>
 {% endif %}
 
-<form action="{% url 'add' %}" method="post">
+<form action="{% url 'tables_layout:add' %}" method="post">
 {% csrf_token %}
     <input type="submit" value="Add">
 </form>
-<form action="{% url 'remove' %}" method="post">
+<form action="{% url 'tables_layout:remove' %}" method="post">
 {% csrf_token %}
     <input type="submit" value="Remove">
 </form>
