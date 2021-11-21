@@ -14,9 +14,9 @@ class IndexView(generic.ListView):
 
 def add(request):
     Table(id=Table.objects.count()+1).save()
-    return redirect("index")
+    return redirect("tables_layout:index")
 
 
 def remove(request):
     Table.objects.latest('id').delete()
-    return redirect("index")
+    return redirect("tables_layout:index")
