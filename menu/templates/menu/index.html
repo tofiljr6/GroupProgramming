@@ -20,7 +20,8 @@
                     {% if request.session.modify %}
                         <li>
                             <label><input hidden="hidden" name="typeToRemove" value="{{ type.id }}"></label>
-                            <input type="submit" value="remove"></li>
+                            <input type="submit" value="remove">
+                        </li>
                     {% endif %}
                 </ul>
             </form>
@@ -31,7 +32,7 @@
                         {% if request.session.modify %}
                             <form action="{% url 'menu:removeDish' %}" method="post">
                                 {% csrf_token %}
-                                <label><input hidden="hidden" name="dishToRemove" value="{{ type.id }}"></label>
+                                <label><input hidden="hidden" name="dishToRemove" value="{{ dish.id }}"></label>
                                 <input type="submit" value="remove">
                             </form>
                         {% endif %}

@@ -25,14 +25,21 @@ def addDish(request):
     return redirect("menu:index")
 
 
+def deleteObjects(index, count, table):
+    for i in range(index, count):
+        t = table.objects.get(id=i)
+        t.id = i - 1
+        t.save()
+
+    if index != count:
+        table.objects.get(id=count-1).delete()
+
+
 def removeDish(request):
     index = Menu.objects.get(id=request.POST['dishToRemove']).getId() + 1
     count = Menu.objects.count() + 1
     Menu.objects.get(id=request.POST['dishToRemove']).delete()
-    for i in range(index, count):
-        t = Menu.objects.get(id=i)
-        t.id = i - 1
-        t.save()
+    deleteObjects(index, count, Menu)
 
     return redirect("menu:index")
 
@@ -49,16 +56,10 @@ def removeType(request):
         dishIndex = dish.getId() + 1
         dishCount = Menu.objects.count() + 1
         dish.delete()
-        for j in range(dishIndex, dishCount):
-            t = Menu.objects.get(id=j)
-            t.id = j - 1
-            t.save()
+        deleteObjects(dishIndex, dishCount, Menu)
 
     DishType.objects.get(id=request.POST['typeToRemove']).delete()
-    for i in range(index, count):
-        t = DishType.objects.get(id=i)
-        t.id = i - 1
-        t.save()
+    deleteObjects(index, count, DishType)
 
     return redirect("menu:index")
 
