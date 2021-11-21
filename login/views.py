@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from login.models import CustomUser
 from login.forms import signUpForm
+from django.contrib import messages
 
 def home(request):
     return render(request, 'login/home.html')
@@ -24,15 +25,18 @@ def signupuser(request):
                                                       email=request.POST['email'],
                                                       point_number=0,
                                                       name=request.POST['name'],
-                                                      surname=request.POST['surname'])
+                                                      surname=request.POST['surname'],
+                                                      role='GUEST')
                 user.save()
                 login(request, user)
                 return redirect('currenttodos')
             except IntegrityError:
-                return render(request, 'login/signupuser.html', {'form':UserCreationForm(), 'error':'That username has already been taken. Please choose a new username.'})
+                messages.info(request, "The username has already benn taken.. Please choose a new username.")
+                return render(request, 'login/signupuser.html', {'form':signUpForm(), 'error':'That username has already been taken. Please choose a new username.'})
         else:
             # Tell the user the password didn't match
-            return render(request, 'login/signupuser.html', {'form':signUpForm(), 'error':form.cleaned_data})
+            messages.info(request, "Passwords do not match")
+            return render(request, 'login/signupuser.html', {'form':signUpForm(), 'error':'password did not match'})
 
 def loginuser(request):
     if request.method == 'GET':

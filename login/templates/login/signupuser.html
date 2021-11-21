@@ -13,7 +13,19 @@
 <body>
     <h1>Sign Up</h1>
     {% block content %}
-        <h2>{{error}}</h2>
+{#        <h2>{{error}}</h2>#}
+
+        {% if messages %}
+            <ul class="message">
+                {% for message in messages %}
+{#                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <div class="container">
             <form method="POST">
                 {% csrf_token %}
