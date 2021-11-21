@@ -1,24 +1,44 @@
-{% if user.is_authenticated %}
+{% load crispy_forms_tags %}
 
-Logged In as {{ user.username }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Menu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    {% if user.is_authenticated %}
 
-
-<form action="{% url 'logoutuser' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
-
-{% else %}
-
-<a href="{% url 'signupuser' %}">Sign up</a>
-<a href="{% url 'loginuser' %}">Login</a>
-
-{% endif %}
-
-<br>
-<br>
-
-{% block content %}
+    Logged In as {{ user.username }}
 
 
-{% endblock %}
+    <form action="{% url 'logoutuser' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    {% else %}
+
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">System zarządzania restauracją</a>
+            <a class="navbar-brand" href="{% url 'signupuser' %}">Sign up</a>
+            <a class="navbar-brand" href="{% url 'loginuser' %}">Login</a>
+        </div>
+    </nav>
+
+
+
+    {% endif %}
+
+    <br>
+    <br>
+
+
+    {% block content %}
+    {% endblock %}
+</body>
