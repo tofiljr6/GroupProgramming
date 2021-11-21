@@ -5,11 +5,21 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class CustomUser(AbstractUser):
+    Roles = (
+        ("GUEST", "guest"),
+        ("WAITER", "waiter"),
+        ("KITCHEN", "kitchen"),
+        ("BAR", "bar"),
+        ("MANAGER", "manager"),
+    )
+
+    'GUEST WAITER KITCHEN BAR MANAGER'
+
     name = models.CharField(max_length=200, default="")
     surname = models.CharField(max_length=200, default="")
     # email = models.CharField(max_length=200)
     point_number =models.IntegerField(default=0)
-    role = models.TextChoices('Role', 'GUEST WAITER KITCHEN BAR MANAGER')
+    role = models.CharField(max_length=10, choices=Roles, default='GUEST')
 
 class Table(models.Model):
     isFree = models.TextChoices('isFree', 'FREE TAKEN RESERVED')
