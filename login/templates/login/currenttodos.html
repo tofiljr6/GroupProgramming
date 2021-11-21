@@ -1,7 +1,62 @@
 {% extends 'login/base.html' %}
+{% load crispy_forms_tags %}
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Menu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    {% block content %}
+        <div class="container">
 
-    <h1>Current</h1>
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">Jedzenie u nas to sztuka</p>
+                <footer class="blockquote-footer">Ktoś mało znany <cite title="Source Title">Nikt</cite></footer>
+            </blockquote>
 
-{% endblock %}
+            <h1>Miło Cię znowu widzieć, {{ user.username }}</h1>
+
+            <h2>Ostatnio u nas zamówiłeś(aś)</h2>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Food photo 1">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Food photo 2">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Food photo 3">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Food photo 4">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>Twoja liczba uzyskanych punktów</h2>
+            <p class="justify-content">5</p>
+        </div>
+    {% endblock %}
+</body>

@@ -18,6 +18,7 @@ from django.urls import path, include
 from login import views
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -32,6 +33,7 @@ urlpatterns = [
 
     # menu
     path('menu/', include('menu.urls')),
+    # path('menu/', menu.views.)
 
     # tables layout
     path('tables_layout/', include('tables_layout.urls')),
