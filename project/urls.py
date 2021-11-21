@@ -33,7 +33,9 @@ urlpatterns = [
 
     # menu
     path('menu/', include('menu.urls')),
-    # path('menu/', menu.views.)
+
+    # manager
+    path('managment/', include('manager.urls')),
 
     # tables layout
     path('tables_layout/', include('tables_layout.urls')),

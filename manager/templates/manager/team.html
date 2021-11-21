@@ -1,0 +1,34 @@
+{% extends 'login/base.html' %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    {% block content %}
+        <div class="container">
+            <h1>Zarządzaj zespolem</h1>
+            <p class="text-justify">
+                <span style="color: rgb(83, 164, 81);">Tu będzie opis co ta sekcja dokładnie robi, ale to później, teraz dla wyglądy wkleje parę linijek lorem ipsum.</span>
+                orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                to make a type specimen book.</p>
+            {% if user_list %}
+                {% for user in user_list %}
+                    <ul class="list-inline">
+                        <li>{{ user.name }}</li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <h1>Lipa</h1>
+            {% endif %}
+        </div>
+
+    {% endblock %}
+</body>

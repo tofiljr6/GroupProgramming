@@ -25,7 +25,7 @@
                     </li>
                 </ul>
                 <span class="navbar-text" style="padding-right: 10px;">
-                    Logged In as <span style="color: red;">{{ user.username }}</span>
+                    Logged In as <span style="color: red;">{{ user.username }}</span> as <span style="">{{ user.role }}</span>
                 </span>
                 <form class="form-inline my-2 my-lg-0" action="{% url 'logoutuser' %}" method="POST">
                     {% csrf_token %}
