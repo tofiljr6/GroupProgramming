@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout, authenticate
 from login.models import CustomUser
 from login.forms import signUpForm
 from django.contrib import messages
+from manager.views import homemanagment
 
 def home(request):
     return render(request, 'login/home.html')
@@ -43,12 +44,20 @@ def loginuser(request):
         return render(request, 'login/loginuser.html', {'form':AuthenticationForm()})
     else:
         user = authenticate(request, username=request.POST["username"], password=request.POST["password"])
+        cu = CustomUser.objects.get(username=request.POST["username"]).role
+
         if user is None:
             messages.info(request, "Username and password did not match")
             return render(request, 'login/loginuser.html', {'form':AuthenticationForm(), 'error':"Username and password did not match"})
         else:
+            # messages.info(request, cu)
+            # return render(request, 'login/loginuser.html',
+            #               {'form': AuthenticationForm(), 'error': "Username and password did not match"})
             login(request, user)
-            return redirect('currenttodos')
+            if cu == 'MANAGER':
+                return redirect('manager:homemanagment')
+            else:
+                return redirect('currenttodos')
             
             
 def logoutuser(request):

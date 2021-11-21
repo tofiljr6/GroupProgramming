@@ -1,0 +1,53 @@
+{% extends 'login/base.html' %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Witaj w panelu zarządzania restauracją</h1>
+        <h3 style="padding-bottom: 40px;">Wybierz z poniższych opcji co chesz zrobić</h3>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Zespół</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Zmień role</h6>
+                        <p class="card-text">Roszady w firmie? Zmień swoim pracowniką role aby byli odpowiedzialni za swoje czyny.</p>
+                        <a href="{% url 'manager:teammanagment' %}" class="card-link">Działaj</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Menu</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Ustal nowe ceny</h6>
+                        <p class="card-text">Chesz zmienić ceny w menu? A może chcesz dodać kolejne danie? Ta opcja jest dla Ciebie.</p>
+                        <a href="{% url 'menu:index' %}" class="card-link">Działaj</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Inne</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Inne</h6>
+                        <p class="card-text">Inne - czeka z nieciepliwością na wersje beta.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+</body>
+</html>
