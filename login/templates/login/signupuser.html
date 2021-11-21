@@ -12,10 +12,10 @@
     </head>
 <body>
     <h1>Sign Up</h1>
-    <h2>{{error}}</h2>
     {% block content %}
+        <h2>{{error}}</h2>
         <div class="container">
-            <form method="post">
+            <form method="POST">
                 {% csrf_token %}
 {#                <div class="form-group">#}
 {#                    {{ form.username|as_crispy_field }}#}

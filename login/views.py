@@ -16,6 +16,7 @@ def signupuser(request):
         return render(request, 'login/signupuser.html', {'form':signUpForm()})
     else:
         # create a new user
+        form = signUpForm(request.POST)
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = CustomUser.objects.create_user(username=request.POST['username'],
@@ -31,7 +32,7 @@ def signupuser(request):
                 return render(request, 'login/signupuser.html', {'form':UserCreationForm(), 'error':'That username has already been taken. Please choose a new username.'})
         else:
             # Tell the user the password didn't match
-            return render(request, 'login/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
+            return render(request, 'login/signupuser.html', {'form':signUpForm(), 'error':form.cleaned_data})
 
 def loginuser(request):
     if request.method == 'GET':
