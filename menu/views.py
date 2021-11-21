@@ -47,7 +47,8 @@ def removeDish(request):
 def editDish(request):
     d = Menu.objects.get(id=request.POST['id'])
     d.dish_name = request.POST['newName']
-    d.price = request.POST['newPrice']
+    if request.POST['newPrice'] != "":
+        d.price = request.POST['newPrice']
     d.save()
 
     return redirect("menu:index")

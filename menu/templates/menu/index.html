@@ -47,7 +47,7 @@
                                 {% csrf_token %}
                                 <label><input hidden="hidden" name="id" value="{{ dish.id }}"></label>
                                 <label><input type="text" name="newName" required="required"></label>
-                                <label><input type="number" step="0.01" name="newPrice" required="required"></label>
+                                <label><input type="number" step="0.01" name="newPrice"></label>
                             <input type="submit" value="Change name and price">
                         </form>
                         {% endif %}
