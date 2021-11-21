@@ -13,18 +13,26 @@
     <h1>Menu</h1>
     {% if type_list %}
         {% for type in type_list %}
-            <form action="{% url 'menu:removeType' %}" method="post">
-                {% csrf_token %}
-                <ul class="list-inline">
-                    <li><h3>{{ type.type_name }}</h3></li>
-                    {% if request.session.modify %}
-                        <li>
+            <ul class="list-inline">
+                <li><h3>{{ type.type_name }}</h3></li>
+                {% if request.session.modify %}
+                    <li>
+                        <form action="{% url 'menu:removeType' %}" method="post">
+                            {% csrf_token %}
                             <label><input hidden="hidden" name="typeToRemove" value="{{ type.id }}"></label>
-                            <input type="submit" value="remove">
-                        </li>
-                    {% endif %}
-                </ul>
-            </form>
+                            <input type="submit" value="Remove">
+                        </form>
+                    </li>
+                    <li>
+                        <form action="{% url 'menu:editType' %}" method="post">
+                            {% csrf_token %}
+                            <label><input hidden="hidden" name="id" value="{{ type.id }}"></label>
+                            <label><input type="text" name="newName" required="required"></label>
+                            <input type="submit" value="Change name">
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
             <ul>
                 {% for dish in type.menu_set.all %}
                     <li class="list-group-item">
@@ -35,8 +43,16 @@
                                 <label><input hidden="hidden" name="dishToRemove" value="{{ dish.id }}"></label>
                                 <input type="submit" value="remove">
                             </form>
+                            <form action="{% url 'menu:editDish' %}" method="post">
+                                {% csrf_token %}
+                                <label><input hidden="hidden" name="id" value="{{ dish.id }}"></label>
+                                <label><input type="text" name="newName" required="required"></label>
+                                <label><input type="number" step="0.01" name="newPrice"></label>
+                            <input type="submit" value="Change name and price">
+                        </form>
                         {% endif %}
-                        <span class="badge">{{ dish.price }}</span></li>
+                        <span class="badge">{{ dish.price }}</span>
+                    </li>
                 {% endfor %}
                 {% if request.session.modify %}
                     <form action="{% url 'menu:addDish' %}" method="post">
@@ -44,7 +60,7 @@
                         <li class="list-group-item">
                             <label><input hidden="hidden" name="type" value="{{ type.id }}"></label>
                             <label for="newDish">Dish:</label><input type="text" id="newDish" name="newDish" required="required">
-                            <label for="newPrice">Price:</label><input type="text" id="newPrice" name="newPrice" required="required">
+                            <label for="newPrice">Price:</label><input type="number" step="0.01" id="newPrice" name="newPrice" required="required">
                             <input type="submit" value="Add">
                         </li>
                     </form>

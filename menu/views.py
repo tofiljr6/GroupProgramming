@@ -44,6 +44,16 @@ def removeDish(request):
     return redirect("menu:index")
 
 
+def editDish(request):
+    d = Menu.objects.get(id=request.POST['id'])
+    d.dish_name = request.POST['newName']
+    if request.POST['newPrice'] != "":
+        d.price = request.POST['newPrice']
+    d.save()
+
+    return redirect("menu:index")
+
+
 def addType(request):
     DishType(id=DishType.objects.count() + 1, type_name=request.POST['newType']).save()
     return redirect("menu:index")
@@ -60,6 +70,14 @@ def removeType(request):
 
     DishType.objects.get(id=request.POST['typeToRemove']).delete()
     deleteObjects(index, count, DishType)
+
+    return redirect("menu:index")
+
+
+def editType(request):
+    d = DishType.objects.get(id=request.POST['id'])
+    d.type_name = request.POST['newName']
+    d.save()
 
     return redirect("menu:index")
 
