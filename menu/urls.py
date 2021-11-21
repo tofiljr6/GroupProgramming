@@ -10,5 +10,7 @@ urlpatterns = [
     path('addType/', views.addType, name='addType'),
     path('removeType/', views.removeType, name='removeType'),
     path('removeDish/', views.removeDish, name='removeDish'),
+    path('editType/', views.editType, name='editType'),
+    path('editDish/', views.editDish, name='editDish'),
     path('modify/', views.modify, name='modify'),
 ]
