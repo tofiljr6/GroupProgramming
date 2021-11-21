@@ -13,19 +13,55 @@
     <h1>Menu</h1>
     {% if type_list %}
         {% for type in type_list %}
-            <h3>{{ type.type_name }}</h3>
+            <form action="{% url 'menu:removeType' %}" method="post">
+                {% csrf_token %}
+                <ul class="list-inline">
+                    <li><h3>{{ type.type_name }}</h3></li>
+                    {% if request.session.modify %}
+                        <li>
+                            <label><input hidden="hidden" name="typeToRemove" value="{{ type.id }}"></label>
+                            <input type="submit" value="remove"></li>
+                    {% endif %}
+                </ul>
+            </form>
             <ul>
                 {% for dish in type.menu_set.all %}
-                    <li class="list-group-item"><a href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a>
+                    <li class="list-group-item">
+                        <a href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a>
+                        {% if request.session.modify %}
+                            <form action="{% url 'menu:removeDish' %}" method="post">
+                                {% csrf_token %}
+                                <label><input hidden="hidden" name="dishToRemove" value="{{ type.id }}"></label>
+                                <input type="submit" value="remove">
+                            </form>
+                        {% endif %}
                         <span class="badge">{{ dish.price }}</span></li>
                 {% endfor %}
+                {% if request.session.modify %}
+                    <form action="{% url 'menu:addDish' %}" method="post">
+                        {% csrf_token %}
+                        <li class="list-group-item">
+                            <label><input hidden="hidden" name="type" value="{{ type.id }}"></label>
+                            <label for="newDish">Dish:</label><input type="text" id="newDish" name="newDish" required="required">
+                            <label for="newPrice">Price:</label><input type="text" id="newPrice" name="newPrice" required="required">
+                            <input type="submit" value="Add">
+                        </li>
+                    </form>
+                {% endif %}
             </ul>
         {% endfor %}
     {% elif not request.session.modify %}
         <p>Menu is empty.</p>
     {% endif %}
+    {% if request.session.modify %}
+        <form action="{% url 'menu:addType' %}" method="post">
+            {% csrf_token %}
+            <label for="newType"></label><input type="text" id="newType" name="newType" required="required">
+            <input type="submit" value="Add Type">
+        </form>
+    {% endif %}
     <form action="{% url 'menu:modify' %}" method="post">
-    {% csrf_token %}
+        {% csrf_token %}
         {% if request.session.modify %}
             <input type="submit" value="Save and exit editing menu">
         {% else %}
