@@ -1,0 +1,27 @@
+
+<div>Ordered food:</div>
+{% if dishes %}
+    <ul>
+    {% for dish in dishes %}
+        <li>{{ dish.name }} {{dish.price}}</a></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+
+<form action="{% url 'order_more' %}" method="POST">
+    {% csrf_token %}
+    <input type="Submit"  value="Order more"/>
+</form>
+
+
+<form action="{% url 'pay' %}" method="POST">
+    {% csrf_token %}
+    <input type="Submit"  value="Pay"/>
+</form>
+
+<form action="{% url 'change_table' %}" method="POST">
+    {% csrf_token %}
+    {{ tableForm.as_p }}
+    <input type="Submit"  value="Change table"/>
+</form>
