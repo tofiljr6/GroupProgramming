@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <title>Menu</title>
     <meta charset="utf-8">
@@ -7,84 +8,74 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% if request.session.modify %}
+        {% load static %}
+        <script src="{% static 'menu/edit.js' %}"></script>
+    {% endif %}
 </head>
 <body>
 <div class="container">
-    <h1>Menu</h1>
-    {% if type_list %}
-        {% for type in type_list %}
-            <ul class="list-inline">
-                <li><h3>{{ type.type_name }}</h3></li>
-                {% if request.session.modify %}
-                    <li>
-                        <form action="{% url 'menu:removeType' %}" method="post">
-                            {% csrf_token %}
-                            <label><input hidden="hidden" name="typeToRemove" value="{{ type.id }}"></label>
-                            <input type="submit" value="Remove">
-                        </form>
-                    </li>
-                    <li>
-                        <form action="{% url 'menu:editType' %}" method="post">
-                            {% csrf_token %}
-                            <label><input hidden="hidden" name="id" value="{{ type.id }}"></label>
-                            <label><input type="text" name="newName" required="required"></label>
-                            <input type="submit" value="Change name">
-                        </form>
-                    </li>
-                {% endif %}
-            </ul>
-            <ul>
-                {% for dish in type.menu_set.all %}
-                    <li class="list-group-item">
-                        <a href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a>
-                        {% if request.session.modify %}
-                            <form action="{% url 'menu:removeDish' %}" method="post">
-                                {% csrf_token %}
-                                <label><input hidden="hidden" name="dishToRemove" value="{{ dish.id }}"></label>
-                                <input type="submit" value="remove">
-                            </form>
-                            <form action="{% url 'menu:editDish' %}" method="post">
-                                {% csrf_token %}
-                                <label><input hidden="hidden" name="id" value="{{ dish.id }}"></label>
-                                <label><input type="text" name="newName" required="required"></label>
-                                <label><input type="number" step="0.01" name="newPrice"></label>
-                            <input type="submit" value="Change name and price">
-                        </form>
-                        {% endif %}
-                        <span class="badge">{{ dish.price }}</span>
-                    </li>
-                {% endfor %}
-                {% if request.session.modify %}
-                    <form action="{% url 'menu:addDish' %}" method="post">
-                        {% csrf_token %}
-                        <li class="list-group-item">
-                            <label><input hidden="hidden" name="type" value="{{ type.id }}"></label>
-                            <label for="newDish">Dish:</label><input type="text" id="newDish" name="newDish" required="required">
-                            <label for="newPrice">Price:</label><input type="number" step="0.01" id="newPrice" name="newPrice" required="required">
-                            <input type="submit" value="Add">
-                        </li>
-                    </form>
-                {% endif %}
-            </ul>
-        {% endfor %}
-    {% elif not request.session.modify %}
-        <p>Menu is empty.</p>
-    {% endif %}
     {% if request.session.modify %}
-        <form action="{% url 'menu:addType' %}" method="post">
-            {% csrf_token %}
-            <label for="newType"></label><input type="text" id="newType" name="newType" required="required">
-            <input type="submit" value="Add Type">
+        <form action="{% url 'menu:modify' %}" method="post">
+        {% csrf_token %}
+        <input hidden="hidden" type="submit" id="numberOfTypes" name="numberOfTypes">
+    {% endif %}
+
+    <h1>Menu</h1>
+    <ul id="menu">
+        {% if type_list %}
+            {% for type in type_list %}
+                <li>
+                    <ul class="list-inline" id="type{{ type.id }}">
+                        {% if request.session.modify %}
+                            <li><label for="newTypeName{{ type.id }}">
+                                <input id="newTypeName{{ type.id }}" name="newTypeName{{ type.id }}" type="text" placeholder="{{ type.type_name }}">
+                            </label></li>
+                            <li><button type="button" id="removeType{{ type.id }}" name="removeType{{ type.id }}">Remove</button></li>
+                            <li><button type="button" id="addDish{{ type.id }}" name="addDish{{ type.id }}">Add new dish</button></li>
+                        {% else %}
+                            <li><h3>{{ type.type_name }}</h3></li>
+                        {% endif %}
+                    </ul>
+                    <ul id="dishes{{ type.id }}">
+                        {% for dish in type.menu_set.all %}
+                            <li class="list-group-item">
+                                {% if request.session.modify %}
+                                    <a>
+                                        <label for="newDishName{{ dish.id }}">
+                                        <input id="newDishName{{ dish.id }}" name="newDishName{{ dish.id }}" type="text" placeholder="{{ dish.dish_name }}">
+                                        </label>
+                                        <button type="button" id="removeDish">Remove</button>
+                                    </a>
+                                    <span class="badge"><label for="newDishPrice{{ dish.id }}">
+                                        <input id="newDishPrice{{ dish.id }}" name="newDishPrice{{ dish.id }}" type="number" step="0.01" placeholder="{{ dish.price }}">
+                                    </label></span>
+                                {% else %}
+                                    <a href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a>
+                                    <span class="badge">{{ dish.price }}</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        {% elif not request.session.modify %}
+            <p>Menu is empty.</p>
+        {% endif %}
+    </ul>
+
+    {% if request.session.modify %}
+            <button type="button" id="addType">Add new type</button>
+            <br>
+            <input type="submit" value="Save and exit editing menu">
+        </form>
+    {% else %}
+        <form action="{% url 'menu:modify' %}" method="post">
+        {% csrf_token %}
+            <input type="submit" value="Edit menu">
         </form>
     {% endif %}
-    <form action="{% url 'menu:modify' %}" method="post">
-        {% csrf_token %}
-        {% if request.session.modify %}
-            <input type="submit" value="Save and exit editing menu">
-        {% else %}
-            <input type="submit" value="Edit menu">
-        {% endif %}
-    </form>
+
 </div>
 </body>
 </html>
