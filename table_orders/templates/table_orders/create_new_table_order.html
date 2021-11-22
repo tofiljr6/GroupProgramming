@@ -1,0 +1,16 @@
+
+<div>Tables:</div>
+{% if tables %}
+    <ul>
+    {% for table in tables %}
+        <li>{{ table.id }} {{table.status}}</a></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ createNewTableOrder.as_p }}
+    <input type="Submit" name="selectTable" value="Create new table order"/>
+</form>

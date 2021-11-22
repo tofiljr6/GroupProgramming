@@ -40,5 +40,7 @@ urlpatterns = [
     # tables layout
     path('tables_layout/', include('tables_layout.urls')),
     
-    path('order/', include('order.urls'))
+    path('order/', include('order.urls')),
+
+    path('table_orders/', include('table_orders.urls'))
 ]

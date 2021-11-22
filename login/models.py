@@ -2,8 +2,7 @@ from django.db import models
 from django.db.models.deletion import SET_NULL
 from django.db.models.fields import DateField
 from django.contrib.auth.models import AbstractUser
-
-
+from tables_layout import models  as tableModel
 # Create your models here.
 class CustomUser(AbstractUser):
     Roles = (
@@ -23,16 +22,13 @@ class CustomUser(AbstractUser):
     role = models.CharField(max_length=10, choices=Roles, default='GUEST')
 
 
-class Table(models.Model):
-    isFree = models.TextChoices('isFree', 'FREE TAKEN RESERVED')
 
 
 class Table_Order(models.Model):
-    table_id = models.ForeignKey(Table, on_delete=models.SET_NULL, null=True)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='user')
-    waiter_id = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='waiter')
-    is_paid = models.BooleanField(default=False)
-
+    table_id = models.ForeignKey(tableModel.Table, on_delete= models.SET_NULL, null= True)
+    user_id = models.ForeignKey(CustomUser, on_delete= models.SET_NULL, null= True, related_name='user')
+    waiter_id = models.ForeignKey(CustomUser, on_delete= models.SET_NULL, null= True, related_name='waiter')
+    is_paid = models.BooleanField(default= False)
 
 class Supply(models.Model):
     product = models.CharField(max_length=200)
