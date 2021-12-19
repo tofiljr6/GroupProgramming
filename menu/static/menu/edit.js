@@ -1,62 +1,94 @@
 let typesCount = 1
-let dishesCount = 0
+let dishesCount = 1
 
-$(document).ready(function(){
-    $("#numberOfTypes").val(typesCount);
-    $("#addType").click(function() {
-        let c = typesCount;
-        typesCount++;
-        $("#numberOfTypes").val(typesCount);
-        $("#menu").append(" <li id=\"typeToAdd" + c + "\">" +
-            "                   <ul class=\"list-inline\">" +
-            "                       <li><label for=\"addedNewTypeName" + c + "\">" +
-            "                           <input id=\"addedNewTypeName" + c + "\" name=\"addedNewTypeName" + c + "\" type=\"text\">" +
-            "                       </label></li>" +
-            "                       <li><button type=\"button\" id=\"dontAdd" + c + "\">Remove</button></li>" +
-            "                       <li><button type=\"button\" id=\"addDishToNew" + c + "\" id=\"addDishToNew" + c + "\">Add new dish</button></li>" +
-            "                   </ul>" +
-            "                   <ul id=\"addedTypeDishes" + c + "\">" +
-            "                   </ul>" +
-            "               </li>");
-
-        $(document).on("click", "#dontAdd" + c, function() {
-            $("#typeToAdd" + c).remove();
-            typesCount--;
-            $("#numberOfTypes").val(typesCount);
-        });
-
-        $(document).on("click", "#addDishToNew" + c, function() {
-            $("#addedTypeDishes" + c).append("<li class=\"list-group-item\">" +
-                "                                   <a>" +
-                "                                       <label for=\"newDishName\">" +
-                "                                       <input id=\"newDishName\" name=\"newDishName\" type=\"text\">" +
-                "                                       </label>" +
-                "                                       <button type=\"button\" id=\"removeDish\" name=\"removeDish\">Remove</button>" +
-                "                                   </a>" +
-                "                                   <span class=\"badge\"><label for=\"newDishPrice\">" +
-                "                                       <input id=\"newDishPrice\" name=\"newDishPrice\" type=\"number\" step=\"0.01\">" +
-                "                                   </label></span>" +
-                "                               </li>");
-        });
-    });
+$(document).ready(function() {
     for (let i = 1; i < $("#menu").children().length + 1; i++) {
+        let k = typesCount;
         typesCount++;
-        $("#numberOfTypes").val(typesCount);
-        $("#addDish" + i).click(function() {
-            $("#dishes" + i).append("   <li class=\"list-group-item\">" +
-                "                           <a>" +
-                "                               <label for=\"newDishName\">" +
-                "                               <input id=\"newDishName\" type=\"text\">" +
-                "                               </label>" +
-                "                               <button type=\"button\" id=\"removeDish\">Remove</button>" +
-                "                           </a>" +
-                "                           <span class=\"badge\"><label for=\"newDishPrice\">" +
-                "                               <input id=\"newDishPrice\" type=\"number\" step=\"0.01\">" +
-                "                           </label></span>" +
-                "                       </li>");
-        });
-        $("#removeType" + i).click(function() {
+        njsAddDish(k);
+        njsRmType(k);
+        njsRevertType(k);
 
-        });
+        for (let j = 1; j < ($("#dishes" + k).children().length) + 1; j++) {
+            let c = dishesCount;
+            dishesCount++;
+            njsRmDish(k, c);
+            njsRevertDish(k, c);
+        }
     }
+
+    $("#addType").click(function() {
+        let k = typesCount;
+        typesCount++;
+        $("#menu").append(htmlType(k));
+        njsAddDish(k);
+        njsRmType(k);
+    });
 });
+
+function njsAddDish(k) {
+    $("#addDish" + k).click(function() {
+        let c = dishesCount;
+        dishesCount++;
+        $("#dishes" + k).append(htmlDish(k, c));
+        njsRmDish(k, c);
+    });
+}
+
+function njsRmDish(k, c) {
+    $("#" + k + "removeDish" + c).click(function() {
+        $("#" + k + "newDishName" + c).val("");
+        $("#" + k + "dish" + c).hide();
+    });
+}
+
+function njsRevertDish(k, c) {
+    $("#" + k + "revertDish" + c).click(function() {
+        let name = $("#" + k + "newDishName" + c);
+        let price = $("#" + k + "newDishPrice" + c);
+        name.val(name.attr("placeholder"));
+        price.val(price.attr("placeholder"));
+    });
+}
+
+function njsRmType(k) {
+    $("#removeType" + k).click(function() {
+        $("#newTypeName" + k).val("");
+        $("#type" + k).hide();
+    });
+}
+
+function njsRevertType(k) {
+    $("#revertType" + k).click(function() {
+        let name = $("#newTypeName" + k);
+        name.val(name.attr("placeholder"));
+    });
+}
+
+function htmlType(c) {
+    return "    <li id=\"type" + c + "\">" +
+            "       <ul class=\"list-inline\">" +
+            "           <li><label for=\"newTypeName" + c + "\">" +
+            "               <input id=\"newTypeName" + c + "\" name=\"newTypeName" + c + "\" type=\"text\">" +
+            "           </label></li>" +
+            "           <li><button type=\"button\" id=\"removeType" + c + "\">Remove</button></li>" +
+            "           <li><button type=\"button\" id=\"addDish" + c + "\" id=\"addDish" + c + "\">Add new dish</button></li>" +
+            "       </ul>" +
+            "       <ul id=\"dishes" + c + "\">" +
+            "       </ul>" +
+            "   </li>"
+}
+
+function htmlDish(k, c) {
+    return "    <li id=\"" + k + "dish" + c + "\" class=\"list-group-item\">" +
+            "       <a>" +
+            "           <label for=\"" + k + "newDishName" + c + "\">" +
+            "           <input id=\"" + k + "newDishName" + c + "\" name=\"" + k + "newDishName" + c + "\" type=\"text\">" +
+            "           </label>" +
+            "           <button type=\"button\" id=\"" + k + "removeDish" + c + "\">Remove</button>" +
+            "       </a>" +
+            "       <span class=\"badge\"><label for=\"" + k + "newDishPrice" + c + "\">" +
+            "           <input id=\"" + k + "newDishPrice" + c + "\" name=\"" + k + "newDishPrice" + c + "\" type=\"number\" step=\"0.01\">" +
+            "       </label></span>" +
+            "   </li>"
+}
