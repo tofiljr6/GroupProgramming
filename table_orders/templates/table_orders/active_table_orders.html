@@ -2,7 +2,7 @@
 {% if table_orders %}
     <ul>
     {% for table_order in table_orders %}
-        <li>{{ table_order.id }} {{table_order.table_id}}  {{table_order.user_id}}  {{table_order.waiter_id}}  {{table_order.is_paid}}</a></li>
+        <li>Table Order Id: {{ table_order.id }} Table Id: {{table_order.table_id.id}} User: {{table_order.user_id}} Waiter: {{table_order.waiter_id}} Is paid: {{table_order.is_paid}}</a></li>
     {% endfor %}
     </ul>
     {% endif %}
@@ -11,7 +11,7 @@
     {% if tables %}
         <ul>
         {% for table in tables %}
-            <li>{{ table.id }} {{table.status}}</a></li>
+            <li>{{ table }} </a></li>
         {% endfor %}
         </ul>
         {% endif %}

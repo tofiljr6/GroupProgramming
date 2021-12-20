@@ -19,11 +19,6 @@ def table_orders(request):
    
     return render(request, 'table_orders/active_table_orders.html', {'tables': tables, 'table_orders': tablesOrders, 'createNewTableOrder':createNewTableOrder,  'selectTableOrder':selectTableOrder})
 
-# def order_more(request):
-#     print("XD")
-#     table_order_id = request.session['table_order_id']
-#     orderForm= OrderForm(request.POST or None)
-#     return render(request, 'waiter/order.html', {'table_order_id': table_order_id, 'orderForm' : orderForm})
 
 
 def pay(request):

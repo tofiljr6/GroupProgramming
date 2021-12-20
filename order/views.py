@@ -55,4 +55,5 @@ def submitOrder(request):
     createNewTableOrder = CreateNewTableOrder(request.POST or None)
     tables = Table.objects.all
     tablesOrders = Table_Order.objects.all
+    request.session.flush()
     return render(request, 'table_orders/active_table_orders.html', {'tables': tables, 'table_orders': tablesOrders, 'createNewTableOrder':createNewTableOrder,  'selectTableOrder':selectTableOrder})
