@@ -11,6 +11,8 @@ class Table(models.Model):
     state = models.CharField(max_length=8,
                              choices=States,
                              default="BUSY")
+    x = models.IntegerField(default=500)
+    y = models.IntegerField(default=500)
 
     def __str__(self):
-        return f"{self.pk} - {self.state}"
+        return f"{self.id} - {self.state}"
