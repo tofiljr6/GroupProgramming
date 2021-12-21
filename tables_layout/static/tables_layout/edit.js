@@ -59,9 +59,10 @@ window.onload = () => {
 
     $("#add").click(() => {
         count++;
-        $("#tableList").append("<li id=\"" + count + "\" value=\"NEW\">\n" +
+        $("#tableList").append("<li id=\"" + count + "\">\n" +
             "                    <label for=\"x" + count + "\"><input id=\"x" + count + "\" name=\"x" + count + "\" value=\"500\"></label>\n" +
             "                    <label for=\"y" + count + "\"><input id=\"y" + count + "\" name=\"y" + count + "\" value=\"500\"></label>\n" +
+            "                    <label for=\"state" + count + "\"><input id=\"state" + count + "\" name=\"state" + count + "\" value=\"FREE\"></label>\n" +
             "                   </li>");
     });
     $("#remove").click(() => {
@@ -96,7 +97,7 @@ function draw() {
             gl.fillStyle = "#000000";
             gl.fillRect(x - (tableSize / 2) * 1.2, y - (tableSize / 2) * 1.2, tableSize * 1.2, tableSize * 1.2);
         }
-        const state = $("#" + (i + 1)).attr("value");
+        const state = $("#state" + (i + 1)).val();
         if (state === "BUSY") gl.fillStyle = "#9f3232";
         else if (state === "RESERVED") gl.fillStyle = "#b0983a";
         else if (state === "FREE") gl.fillStyle = "#85b22e";

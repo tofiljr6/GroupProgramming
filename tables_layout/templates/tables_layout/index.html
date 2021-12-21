@@ -16,9 +16,10 @@
         <ul id="tableList" count="{{ tables_list.count }}">
             {% if tables_list %}
                 {% for table in tables_list %}
-                    <li id="{{ table.id }}" value="{{ table.state }}">
+                    <li id="{{ table.id }}">
                         <label for="x{{ table.id }}"><input id="x{{ table.id }}" name="x{{ table.id }}" value="{{ table.x }}"></label>
                         <label for="y{{ table.id }}"><input id="y{{ table.id }}" name="y{{ table.id }}" value="{{ table.y }}"></label>
+                        <label for="state{{ table.id }}"><input id="state{{ table.id }}" name="state{{ table.id }}" value="{{ table.state }}"></label>
                     </li>
                 {% endfor %}
             {% endif %}

@@ -19,6 +19,7 @@ def save(request):
         if request.POST.get(f'x{c}') is not None:
             if request.POST.get(f'x{c}', '') != '':
                 t = Table(id=Table.objects.count() + 1,
+                          state=request.POST[f'state{c}'],
                           x=request.POST[f'x{c}'],
                           y=request.POST[f'y{c}'])
                 t.save()
