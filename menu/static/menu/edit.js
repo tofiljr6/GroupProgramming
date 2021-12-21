@@ -1,7 +1,7 @@
 let typesCount = 1
 let dishesCount = 1
 
-$(document).ready(function() {
+$(document).ready(() => {
     for (let i = 1; i < $("#menu").children().length + 1; i++) {
         let k = typesCount;
         typesCount++;
@@ -17,7 +17,7 @@ $(document).ready(function() {
         }
     }
 
-    $("#addType").click(function() {
+    $("#addType").click(() => {
         let k = typesCount;
         typesCount++;
         $("#menu").append(htmlType(k));
@@ -27,7 +27,7 @@ $(document).ready(function() {
 });
 
 function njsAddDish(k) {
-    $("#addDish" + k).click(function() {
+    $("#addDish" + k).click(() => {
         let c = dishesCount;
         dishesCount++;
         $("#dishes" + k).append(htmlDish(k, c));
@@ -36,14 +36,14 @@ function njsAddDish(k) {
 }
 
 function njsRmDish(k, c) {
-    $("#" + k + "removeDish" + c).click(function() {
+    $("#" + k + "removeDish" + c).click(() => {
         $("#" + k + "newDishName" + c).val("");
         $("#" + k + "dish" + c).hide();
     });
 }
 
 function njsRevertDish(k, c) {
-    $("#" + k + "revertDish" + c).click(function() {
+    $("#" + k + "revertDish" + c).click(() => {
         let name = $("#" + k + "newDishName" + c);
         let price = $("#" + k + "newDishPrice" + c);
         name.val(name.attr("placeholder"));
@@ -52,14 +52,14 @@ function njsRevertDish(k, c) {
 }
 
 function njsRmType(k) {
-    $("#removeType" + k).click(function() {
+    $("#removeType" + k).click(() => {
         $("#newTypeName" + k).val("");
         $("#type" + k).hide();
     });
 }
 
 function njsRevertType(k) {
-    $("#revertType" + k).click(function() {
+    $("#revertType" + k).click(() => {
         let name = $("#newTypeName" + k);
         name.val(name.attr("placeholder"));
     });

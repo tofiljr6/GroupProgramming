@@ -12,11 +12,18 @@ class IndexView(generic.ListView):
         return Table.objects.all()
 
 
-def add(request):
-    Table(id=Table.objects.count()+1).save()
-    return redirect("tables_layout:index")
+def save(request):
+    Table.objects.all().delete()
+    c = 1
+    while True:
+        if request.POST.get(f'x{c}') is not None:
+            if request.POST.get(f'x{c}', '') != '':
+                t = Table(id=Table.objects.count() + 1,
+                          x=request.POST[f'x{c}'],
+                          y=request.POST[f'y{c}'])
+                t.save()
 
-
-def remove(request):
-    Table.objects.latest('id').delete()
+        else:
+            break
+        c += 1
     return redirect("tables_layout:index")
