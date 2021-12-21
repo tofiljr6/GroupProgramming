@@ -1,0 +1,31 @@
+<div>Tables orders:</div>
+{% if table_orders %}
+    <ul>
+    {% for table_order in table_orders %}
+        <li>Table Order Id: {{ table_order.id }} Table Id: {{table_order.table_id.id}} User: {{table_order.user_id}} Waiter: {{table_order.waiter_id}} Is paid: {{table_order.is_paid}}</a></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+<div>Tables:</div>
+    {% if tables %}
+        <ul>
+        {% for table in tables %}
+            <li>{{ table }} </a></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+<form action="{% url 'select_table_order_customer' %}" method="POST">
+    {% csrf_token %}
+    {{ selectTableOrder.as_p }}
+    <input type="Submit"  value="Select table order"/>
+</form>
+
+<form action="{% url 'create_table_order' %}" method="POST">
+    {% csrf_token %}
+    {{ createNewTableOrder.as_p }}
+    <input type="Submit" value="Create new table order"/>
+</form>
+
+

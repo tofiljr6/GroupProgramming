@@ -15,10 +15,6 @@
 </form>
 
 
-<form action="{% url 'pay' %}" method="POST">
-    {% csrf_token %}
-    <input type="Submit"  value="Pay"/>
-</form>
 
 <form action="{% url 'change_table' %}" method="POST">
     {% csrf_token %}

@@ -1,0 +1,55 @@
+<head>
+<meta charset="UTF-8">
+<title>Order</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Menu</h1>
+        <ul id="menu">
+            {% if type_list %}
+                {% for type in type_list %}
+                    <li id="type{{ type.id }}">
+                        <ul class="list-inline">
+                                <li><h3>{{ type.type_name }}</h3></li>
+                        </ul>
+                        <ul id="dishes{{ type.id }}">
+                            {% for dish in type.menu_set.all %}
+                                <li id="{{ type.id }}dish{{ dish.id }}" class="list-group-item">
+                                   
+                                    <form action="{% url 'order_more' %}" method='POST'>
+                                        {% csrf_token %}
+                                        <button type='submit' value= {{dish.id}} name= "Add" >{{dish.dish_name}}</button>
+                                        
+                                    <span class="badge">{{ dish.price }}</span>
+                                </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+    </div>
+
+{% for dish in dishes %}
+<li>{{dish.dish_name}}  <form action="{% url 'order_more' %}" method='POST'> {% csrf_token %}  <span class="badge">{{ dish.price }}</span>  
+    <button type='submit' value= {{dish.id}} name= "delete" >Delete</button>
+   </li>
+</form>
+{% endfor %}
+
+
+
+
+
+<form action="{% url 'submit_order' %}" method="POST">
+    {% csrf_token %}
+   
+    <input type="Submit" name="Submit order" value="Submit order"/>
+</form>
+
+
+</body>
