@@ -1,0 +1,15 @@
+{% extends 'login/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<h1>Drukowanie</h1>
+
+{#<button type="button" class="btn btn-primary" onclick="{% url 'printer:printorder' %}">Primary</button>#}
+
+<form action="{% url 'printer:printorder' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Primary</button>
+</form>
+
+{% endblock %}
