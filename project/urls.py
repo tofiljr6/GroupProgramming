@@ -22,7 +22,7 @@ from login import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    #path('mailer/', include('mailer.urls')),
+    path('mailer/', include('mailer.urls')),
     
     # Auth
     path('signup/', views.signupuser, name='signupuser'),

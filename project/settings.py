@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'manager',
     'table_orders',
     'printer',
+    'mailer'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -92,8 +93,10 @@ DATABASES = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zespolowe2021@gmail.com'
-EMAIL_HOST_PASSWORD = 'daaeenxgnwskjdbd' #past the key or password app here
+EMAIL_HOST_USER = 'system.obslugi.r@gmail.com'
+EMAIL_HOST_PASSWORD = 'fpriwfafbvalgdjz'
+#EMAIL_HOST_USER = 'zespolowe2021@gmail.com'
+#EMAIL_HOST_PASSWORD = 'daaeenxgnwskjdbd'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'default from email'
