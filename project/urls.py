@@ -21,6 +21,8 @@ from login import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    #path('mailer/', include('mailer.urls')),
     
     # Auth
     path('signup/', views.signupuser, name='signupuser'),
@@ -28,7 +30,8 @@ urlpatterns = [
     path('logout/', views.logoutuser, name='logoutuser'),
     
     # example
-    path('', views.home, name='home'),
+    path('', views.startpage, name='startpage'),
+    path('home/', views.home, name='home'),
     path('example/', views.currenttodos, name='currenttodos'),
 
     # menu
@@ -42,7 +45,5 @@ urlpatterns = [
     
     path('order/', include('order.urls')),
 
-    path('table_orders/', include('table_orders.urls')),
-
-    path('printer/', include('printer.urls'))
+    path('table_orders/', include('table_orders.urls'))
 ]

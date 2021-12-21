@@ -1,13 +1,15 @@
-{#{% extends 'login/base.html' %}#}
-{#{% load crispy_forms_tags %}#}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Menu</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'menu/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Dosis:wght@300&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% if request.session.modify %}
@@ -16,14 +18,13 @@
     {% endif %}
 </head>
 <body>
-{#{% block content %}#}
 <div class="container">
     {% if request.session.modify %}
         <form action="{% url 'menu:modify' %}" method="post">
         {% csrf_token %}
     {% endif %}
 
-    <h1>Menu</h1>
+    <h1>MENU</h1>
     <ul id="menu">
         {% if type_list %}
             {% for type in type_list %}
@@ -60,8 +61,10 @@
                                                step="0.01" placeholder="{{ dish.price }}" value="{{ dish.price }}">
                                     </label></span>
                                 {% else %}
-                                    <a href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a>
-                                    <span class="badge">{{ dish.price }}</span>
+                                    <div class="jedna_pozycja">
+                                        <a class="x" href="/menu/{{ dish.id }}/">{{ dish.dish_name }}</a>
+                                        <span class="y">{{ dish.price }}</span>
+                                    </div>
                                 {% endif %}
                             </li>
                         {% endfor %}
@@ -74,22 +77,29 @@
     </ul>
 
     {% if request.session.modify %}
-            <button type="button" id="addType">Add new type</button>
+        <div class="down_button">
+            <button type="button" class="django_submit" id="addType">Add new type</button>
+        </div>
             <br>
-            <input type="submit" value="Save and exit editing menu">
+        <div class="down_button">
+            <input type="submit" class="django_submit" id="save" value="Save and exit editing menu">
+        </div>
         </form>
         <form action="{% url 'menu:cancel' %}" method="post">
         {% csrf_token %}
-            <input type="submit" value="Cancel">
+            <div class="down_button">
+                <input type="submit" class="django_submit" value="Cancel">
+            </div>
         </form>
-    {% elif user.role == "MANAGER" %}
+    {% else %}
         <form action="{% url 'menu:modify' %}" method="post">
         {% csrf_token %}
-            <input type="submit" value="Edit menu">
+            <div class="edit_button">
+                <input type="submit" class="django_submit" value="Edit menu">
+            </div>
         </form>
     {% endif %}
 
 </div>
-{#{% endblock %}#}
 </body>
 </html>

@@ -1,0 +1,94 @@
+html, body {
+  margin: 0; padding: 0;
+}
+
+.slider-wrap {
+  width: 100%;
+  height:600px;
+  position: relative;
+}
+.single-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    animation: slider-animation;
+    animation-duration: 25s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    background-size: cover;
+    filter: brightness(50%);
+}
+
+#slide-1 {background-color: forestgreen; background-image: url(https://www.questrmg.com/wp-content/uploads/2019/03/web-banner-Top-Three-Restaurant-Trends.jpg);}
+#slide-2 {background-color: darkorange; animation-delay: 5s; background-image: url(https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2018/04/blog_banner_1-1030x538.jpg);}
+#slide-3 {background-color: cornflowerblue; animation-delay: 10s; background-image: url(http://cdn.cnn.com/cnnnext/dam/assets/200803121541-kitopi-1.jpg);}
+#slide-4 {background-color: rebeccapurple; animation-delay: 15s; background-image: url(https://www.lironboylston.com/wp-content/uploads/2020/12/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg);}
+#slide-5 {background-color: darkseagreen; animation-delay: 20s; background-image: url(https://www.qantas.com/content/dam/travelinsider/images/explore/australia/queensland/gold-coast/the-best-restaurants-on-the-gold-coast/social-eating-house-bar-gold-coast-food-wine.jpg);}
+
+@keyframes slider-animation {
+
+0% {
+    opacity: 0;
+}
+6% {
+    opacity: 1;
+}
+24% {
+    opacity: 1;
+}
+30% {
+    opacity: 0;
+}
+100% {
+    opacity: 0;
+}
+}
+
+.wrapper {
+    text-align: center;
+    position: fixed;
+    bottom: 20%;
+    margin: auto;
+    color: white;
+    width: 50%;
+    left: 25%;
+    right: 25%;
+    float: right;
+}
+
+.xd {
+  color: white;
+  font-size: 30px;
+    font-family: 'Abril Fatface', serif;
+}
+
+#text1 {margin-right: 5%;}
+#text2 {margin-left: 5%;}
+
+.xd1 {
+  color: white;
+  font-size: 55px;
+  padding: 8px 12px;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  top: 25%;
+  font-family: 'Abril Fatface', serif;
+    font-weight: bold;
+}
+
+.xd1:hover {
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.xd:hover {
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.xd:visited, .xd1:visited {
+    color: antiquewhite;
+    text-decoration: none;
+}

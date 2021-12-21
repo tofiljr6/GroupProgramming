@@ -1,0 +1,30 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Menu</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'login/style.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+<body>
+
+    <div class="slider-wrap">
+            <a class="single-slide" id="slide-1"></a>
+            <a class="single-slide" id="slide-2"></a>
+            <a class="single-slide" id="slide-3"></a>
+            <a class="single-slide" id="slide-4"></a>
+            <a class="single-slide" id="slide-5"></a>
+            <a class="xd1" href="{% url 'menu:index' %}">Menu</a>
+            <div class="wrapper">
+                <a class="xd" id="text1" href="{% url 'loginuser' %}">Log in</a>
+                <a class="xd" id="text2" href="{% url 'signupuser' %}">Sign up</a>
+            </div>
+    </div>
+
+</body>

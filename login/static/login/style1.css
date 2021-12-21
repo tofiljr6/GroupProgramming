@@ -1,0 +1,50 @@
+html {
+  position: relative;
+    width: 100%;
+    min-height: 100%;
+}
+
+html::before {
+    content: "";
+    background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url(https://www.springhappenings.com/wp-content/uploads/2014/09/crsrxfllostehmuxwzqfkdarpcg0di40toehyl4mzmgrkmy3dpfzxttukvsmluvp-o.jpg);
+    background-size: cover;
+    position: absolute;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    height: 100%;
+    z-index: -1;
+}
+
+#bt {
+    background-color: dimgray;
+    border-color: dimgray;
+}
+
+h1, h3 {
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+help_texts {
+    color: white;
+}
+
+.container {
+
+}
+
+#hello {
+    font-size: 60px;
+}
+
+.blockquote text-center {
+    color: white;
+}

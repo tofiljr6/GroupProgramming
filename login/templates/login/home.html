@@ -1,24 +1,26 @@
 {% extends 'login/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 <!DOCTYPE html>
     <html lang="en">
-    <head>
-        <title>Menu</title>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'login/style1.css' %}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
-<body>
+
 
 {% block content %}
 
-    <div class="container" style="background-color: #e3f2fd;">
-        <h1>Witaj - strona startowa</h1>
+    <div class="container">
+        <h1 id="hello">Witaj - strona startowa</h1>
         <h3>U nas zjesz szybko, niekoniecznie tanio, i niekoniecznie smacznie</h3>
     </div>
+
 
 {% endblock %}
 
