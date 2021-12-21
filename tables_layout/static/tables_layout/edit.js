@@ -99,7 +99,7 @@ function draw() {
         const state = $("#" + (i + 1)).attr("value");
         if (state === "BUSY") gl.fillStyle = "#9f3232";
         else if (state === "RESERVED") gl.fillStyle = "#b0983a";
-        else if (state === "RESERVED") gl.fillStyle = "#85b22e";
+        else if (state === "FREE") gl.fillStyle = "#85b22e";
         else gl.fillStyle = "#ffffff";
         gl.fillRect(x - (tableSize / 2), y - (tableSize / 2), tableSize, tableSize);
     }
