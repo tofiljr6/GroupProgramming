@@ -1,3 +1,6 @@
+{#{% extends 'login/base.html' %}#}
+{#{% load crispy_forms_tags %}#}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +16,7 @@
     {% endif %}
 </head>
 <body>
+{#{% block content %}#}
 <div class="container">
     {% if request.session.modify %}
         <form action="{% url 'menu:modify' %}" method="post">
@@ -78,7 +82,7 @@
         {% csrf_token %}
             <input type="submit" value="Cancel">
         </form>
-    {% else %}
+    {% elif user.role == "MANAGER" %}
         <form action="{% url 'menu:modify' %}" method="post">
         {% csrf_token %}
             <input type="submit" value="Edit menu">
@@ -86,5 +90,6 @@
     {% endif %}
 
 </div>
+{#{% endblock %}#}
 </body>
 </html>
