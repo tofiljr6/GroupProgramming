@@ -10,7 +10,7 @@ class Table(models.Model):
     id = models.IntegerField(primary_key=True)
     state = models.CharField(max_length=8,
                              choices=States,
-                             default="BUSY")
+                             default="FREE")
     x = models.IntegerField(default=500)
     y = models.IntegerField(default=500)
 
