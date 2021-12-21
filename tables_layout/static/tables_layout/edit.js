@@ -57,14 +57,14 @@ window.onload = () => {
     redraw();
     move();
 
-    $("#add").click(function() {
+    $("#add").click(() => {
         count++;
         $("#tableList").append("<li id=\"" + count + "\" value=\"NEW\">\n" +
             "                    <label for=\"x" + count + "\"><input id=\"x" + count + "\" name=\"x" + count + "\" value=\"500\"></label>\n" +
             "                    <label for=\"y" + count + "\"><input id=\"y" + count + "\" name=\"y" + count + "\" value=\"500\"></label>\n" +
             "                   </li>");
     });
-    $("#remove").click(function() {
+    $("#remove").click(() => {
         if (selected != null) {
             $("#x" + selected).val("");
             selected = null;
@@ -99,6 +99,7 @@ function draw() {
         const state = $("#" + (i + 1)).attr("value");
         if (state === "BUSY") gl.fillStyle = "#9f3232";
         else if (state === "RESERVED") gl.fillStyle = "#b0983a";
+        else if (state === "RESERVED") gl.fillStyle = "#85b22e";
         else gl.fillStyle = "#ffffff";
         gl.fillRect(x - (tableSize / 2), y - (tableSize / 2), tableSize, tableSize);
     }
