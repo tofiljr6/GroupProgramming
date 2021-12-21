@@ -1,16 +1,34 @@
-{% if tables_list %}
-    <ul>
-        {% for table in tables_list %}
-        <li><label>Table: {{ table.id }}</label></li>
-        {% endfor %}
-    </ul>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>Layout</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'tables_layout/edit.js' %}"></script>
+</head>
+<body>
+    <form action="{% url 'tables_layout:save' %}" method="post">
+    {% csrf_token %}
+        <ul id="tableList" count="{{ tables_list.count }}">
+            {% if tables_list %}
+                {% for table in tables_list %}
+                    <li id="{{ table.id }}" value="{{ table.state }}">
+                        <label for="x{{ table.id }}"><input id="x{{ table.id }}" name="x{{ table.id }}" value="{{ table.x }}"></label>
+                        <label for="y{{ table.id }}"><input id="y{{ table.id }}" name="y{{ table.id }}" value="{{ table.y }}"></label>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <canvas id="layout"></canvas>
+        <br>
+        <button type="button" id="add">Add</button>
+        <button type="button" id="remove">Remove</button>
+        <input type="submit" value="Save">
+    </form>
 
-<form action="{% url 'tables_layout:add' %}" method="post">
-{% csrf_token %}
-    <input type="submit" value="Add">
-</form>
-<form action="{% url 'tables_layout:remove' %}" method="post">
-{% csrf_token %}
-    <input type="submit" value="Remove">
-</form>
+</body>
+</html>
