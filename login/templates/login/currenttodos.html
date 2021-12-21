@@ -1,5 +1,6 @@
 {% extends 'login/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,19 +9,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'login/style1.css' %}">
 </head>
 <body>
     {% block content %}
         <div class="container">
 
-            <blockquote class="blockquote text-center">
+            <blockquote style="color:white" class="blockquote text-center">
                 <p class="mb-0">Jedzenie u nas to sztuka</p>
                 <footer class="blockquote-footer">Ktoś mało znany <cite title="Source Title">Nikt</cite></footer>
             </blockquote>
 
             <h1>Miło Cię znowu widzieć, {{ user.username }}</h1>
 
-            <h2>Ostatnio u nas zamówiłeś(aś)</h2>
+            <h2 style="color:white">Ostatnio u nas zamówiłeś(aś)</h2>
             <div class="row">
                 <div class="col-sm-3">
                     <div class="card" style="width: 18rem;">
@@ -55,8 +57,8 @@
                     </div>
                 </div>
             </div>
-            <h2>Twoja liczba uzyskanych punktów</h2>
-            <p class="justify-content"> {{ user.point_number }}</p>
+            <h2 style="color:white">Twoja liczba uzyskanych punktów</h2>
+            <p style="color:white" class="justify-content"> {{ user.point_number }}</p>
         </div>
     {% endblock %}
 </body>

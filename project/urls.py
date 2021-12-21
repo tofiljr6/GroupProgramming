@@ -45,5 +45,7 @@ urlpatterns = [
     
     path('order/', include('order.urls')),
 
-    path('table_orders/', include('table_orders.urls'))
+    path('table_orders/', include('table_orders.urls')),
+
+    path('printer/', include('printer.urls'))
 ]
