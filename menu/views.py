@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.views import generic
 
 from menu.models import Menu, DishType
-
+from login.models import CustomUser
 
 class IndexView(generic.ListView):
     template_name = 'menu/index.html'
